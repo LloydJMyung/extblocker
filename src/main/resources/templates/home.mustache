@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-  </head>
-  <body>
-    <h1>Flow home</h1>
-  </body>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>파일 확장자 제한</title>
+    <style>
+        body {
+            margin: 30px;
+        }
+    </style>
+
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+    <div class="form-group">
+        <form id="checkbox_form" method="post" action="/checkform">
+            <label for="fix_ext">고정 확장자</label>
+            <label><input class="position-checkbox" type="checkbox" id="cmd" name="checkbox" value="cmd" onclick="check(this)"> cmd</label>
+            <label><input class="position-checkbox" type="checkbox" id="com" name="checkbox" value="com" onclick="check(this)"> com</label>
+            <label><input class="position-checkbox" type="checkbox" id="cpl" name="checkbox" value="cpl" onclick="check(this)"> cpl</label>
+            <label><input class="position-checkbox" type="checkbox" id="exe" name="checkbox" value="exe" onclick="check(this)"> exe</label>
+            <label><input class="position-checkbox" type="checkbox" id="scr" name="checkbox" value="scr" onclick="check(this)"> scr</label>
+            <label><input class="position-checkbox" type="checkbox" id="js" name="checkbox" value="js" onclick="check(this)"> js</label>
+            <label><input class="position-checkbox" type="checkbox" id="bat" name="checkbox" value="bat" onclick="check(this)"> bat</label>
+        </form>
+    </div>
+    <div class="form-group">
+        <form id="input" method="POST" action="/customs">
+            <label for="custom_ext">커스텀 확장자</label>
+            <input type="text" id="custom_ext" placeholder="확장자 입력"> <button type="button" onclick="addCustoms()"> 추가 </button> <br>
+            <textarea cols="50" rows="10" ></textarea>
+        </form>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function check(box) {
+            var $positions = document.querySelectorAll(".position-checkbox:checked");
+            const positions = [];
+            for(let i = 0; i < $positions.length; i++) {
+                positions.push($positions[i].value)
+            }
+
+            fetch("/checkform", {
+                method: 'post',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    positions : positions
+                })
+            }).then(function(response) {
+                if(response.ok) {
+
+                } else {
+                    alert('요청 실패');
+                }
+            });
+        }
+
+        function addCustoms() {
+            let $input = document.getElementById("custom_ext").value;
+            const input = $input;
+
+            fetch("/customs", {
+                method: 'post',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    ext : input
+                })
+            }).then(function(response) {ㅑ
+                if(response.ok) {
+
+                } else {
+                    alert('요청 실패');
+                }
+            });
+        }
+
+    </script>
+</body>
 </html>
