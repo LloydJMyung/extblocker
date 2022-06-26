@@ -34,7 +34,7 @@
         <form id="input" method="POST" action="/customs">
             <label for="custom_ext">커스텀 확장자</label>
             <input type="text" id="custom_ext" placeholder="확장자 입력"> <button type="button" onclick="addCustoms()"> 추가 </button> <br>
-            <textarea cols="50" rows="10" ></textarea>
+            <label for="text_area"></label> <textarea cols="50" rows="10" ></textarea>
         </form>
     </div>
     <!-- Optional JavaScript -->
@@ -79,7 +79,7 @@
                 body : JSON.stringify({
                     ext : input
                 })
-            }).then(function(response) {ㅑ
+            }).then(function(response) {
                 if(response.ok) {
 
                 } else {

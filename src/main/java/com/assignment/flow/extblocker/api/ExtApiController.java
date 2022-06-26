@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class ExtApiController {
+    /*
     @Autowired
     private DataRepository dataRepository;
 
@@ -34,4 +35,5 @@ public class ExtApiController {
         log.info(saved.toString());
         return saved.getId();
     }
+    */
 }
